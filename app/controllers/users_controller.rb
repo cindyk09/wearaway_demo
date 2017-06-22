@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def create!
     user = User.new(user_params)
-    confirm_password
+    passwords_match
     # need to figure out how to throw error when they don't match.
     if user.save
       render json: user, status: :created
@@ -42,11 +42,9 @@ class UsersController < ApplicationController
   private
   def passwords_match
     if @user.password == @user.password_confirmation
-
     else
-      render_error()
+      :alert => "You're passwords don't match."
     end
-
   end
 
   def set_user

@@ -8,3 +8,5 @@
 end
 
 p "Date has been seeded with #{User.count} New Users"
+
+# seeds database to have something to work with.
