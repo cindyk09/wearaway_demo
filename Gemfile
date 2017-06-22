@@ -46,3 +46,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'will_paginate'
+
+# seed fake data
+gem 'faker'
+
+# Debugging
+gem 'pry-rails'
