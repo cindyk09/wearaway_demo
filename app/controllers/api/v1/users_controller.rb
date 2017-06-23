@@ -1,6 +1,5 @@
 module Api
   module V1
-
     class UsersController < ApplicationController
       before_action :set_user, only:[:show, :update, :destroy]
 
@@ -23,11 +22,10 @@ module Api
       end
 
       def update
-        
         if @user.update_attributes(user_params)
-          render json: @user, status: :ok
+          render json: @user
         else
-          render json: @user, status: :unprocessable_entity
+          render json: {:status => 422, :errors => @user.errors}, status: :unprocessable_entity
         end
       end
 
@@ -45,6 +43,5 @@ module Api
       end
 
     end
-
   end
 end
