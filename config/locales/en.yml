@@ -20,20 +20,4 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  activerecord:
-    attributes:
-      user:
-        email: "E-mail"
-    errors:
-      models:
-        user:
-          attributes:
-            username:
-              blank: "cannot be blank"
-              taken: "is already taken"
-              too_short: "needs to be 5 characters or more"
-            email:
-              blank: "cannot be blank"
-              taken: "is already taken"
-            password:
-              blank: "cannot be blank"
+  hello: "Hello world"
