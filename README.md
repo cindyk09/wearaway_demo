@@ -1,6 +1,5 @@
 # README wearaway_demo
-
-For the code test, I'd like you to build a Rails application that is designed to return JSON responses only (no HTML/CSS user interface). Please create a controller that handles CRUD requests for a User object with the following attributes:
+This is a simple Rails 5 app that is designed to return JSON responses only (no HTML/CSS user interface). It has a User controller that handles CRUD requests for a User object with the following attributes:
 
 • ID
 • Username
@@ -8,24 +7,33 @@ For the code test, I'd like you to build a Rails application that is designed to
 • Password
 • Password Confirmation
 
-The app should validate length/presence of all of these fields (use some sensible default for length). Additionally, it should validate that the password and password confirmation match (you do not have to save the password confirmation, and you don't have to hash the password for this exercise). Any validation failures should return a 422 status code and some reasonable JSON error message (for example: { errors: [ "Username is required", "Password does not match confirmation" ] })
+It validates attributes based on below:
 
-The requests that the application controller should handle are:
+1. Presence of all attributes
+2. Username length can't be less than 5 Characters only after presence is validated.
+3. Email format only after presence is validated
+4. Unique username and email
+5. Password and password_confirmation match.
 
-GET /users(.:format) -> returns JSON for a list of users and a 200 OK status
-POST /users(.:format) -> returns JSON for newly created user and a 201 Created status
+Any validation failures return a personalized 422 status code and JSON error message (for example: { errors: [ "Username can't be blank", "Password_confirmation doesn't match Password ] })
 
-Your applications should include RSpec tests for the User model (and it's validations/attributes) and the two UsersController actions. Feel free to store the data any way you want as long as it's a database that supports SQL queries (SQLite/PostgreSQL/MySQL, etc.). I'll be running the RSpec tests for the app and also using cURL to make some requests manually. For example, if you have your app running on localhost:3000, I'd do something like this:
+RSpec tests have been created for the User model & UsersController for validations/attributes as well as status returned for all success case and errors.
 
-curl -X GET http://localhost:3000/users
+Database used is MySQL.
 
-And I'd expect to see a JSON response that is an array of users, like this:
+Setting up.
 
-[
-  {
-     id: 1,
-     username: 'cliff',
-     password: 'secret',
-     email: 'cliff@wearaway.com'
-  }
-]
+1. Fork repo
+2. Please run the below commands in your terminal
+  1. rails db:create
+  2. rails db:migrate
+  3. rails db:seed
+      (This will seed your development environment with fake data)
+3. Since everything is set up. Let's set up your testing environment. Please run the below commands
+   in your terminal.
+  1. rails db:migrate RAILS_ENV=test
+  2. rails db:seed RAILS_ENV=test
+
+    To make sure that your testing database was created with fake data. Go into it with the below command
+    and see if all users are present
+  3. rails console --environment=test
