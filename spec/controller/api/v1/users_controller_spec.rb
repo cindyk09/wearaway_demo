@@ -12,12 +12,6 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       expect(response.status).to eq(200)
     end
 
-    it "returns correct number of seeded users" do
-      # test for count of seeded data
-      process :index, method: :get
-      expect(json.length).to eq(10)
-    end
-
   end
 
   describe "POST #create" do
@@ -29,12 +23,10 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       end
 
       it "returns 201 status on sucess when it creates new user" do
-        # test for the 201 status-code
         expect(response.status).to eq(201)
       end
 
       it "returns user with the correct attributes after being created created" do
-        # json = JSON.parse(response.body)
         expect(json["username"]).to eq ("cindy123")
         expect(json["email"]).to eq ("cindy123@gmail.com")
       end
@@ -48,12 +40,10 @@ RSpec.describe Api::V1::UsersController, type: :controller do
         end
 
         it "returns 422 status" do
-          # test for the 422 status-code
           expect(response.status).to eq(422)
         end
 
         it "returns an error message" do
-          # json = JSON.parse(response.body)
           expect(json["errors"].values.flatten).to eq (["can't be blank"])
         end
       end
@@ -63,12 +53,10 @@ RSpec.describe Api::V1::UsersController, type: :controller do
           process :create, method: :post, params: {username: "Cind", email: "cindy123@gmail.com", password: "qwerty", password_confirmation: "qwerty"}
         end
         it "returns 422 status" do
-          # test for the 422 status-code
           expect(response.status).to eq(422)
         end
 
         it "returns an error message" do
-          # json = JSON.parse(response.body)
           expect(json["errors"].values.flatten).to eq (["is too short (minimum is 5 characters)"])
         end
       end
@@ -80,12 +68,10 @@ RSpec.describe Api::V1::UsersController, type: :controller do
           process :create, method: :post, params: {username: "cindy123", email: "cindy123@gmail.com", password: "qwerty", password_confirmation: "qwerty"}
         end
         it "returns 422 status" do
-          # test for the 422 status-code
           expect(response.status).to eq(422)
         end
 
         it "returns an error message" do
-          # json = JSON.parse(response.body)
           expect(json["errors"].values.flatten).to eq (["has already been taken"])
         end
       end
@@ -97,12 +83,10 @@ RSpec.describe Api::V1::UsersController, type: :controller do
           process :create, method: :post, params: {username: "cindy123", email: "cindy123@gmail.com", password: "qwerty", password_confirmation: "qwerty"}
         end
         it "returns 422 status" do
-          # test for the 422 status-code
           expect(response.status).to eq(422)
         end
 
         it "returns an error message" do
-          # json = JSON.parse(response.body)
           expect(json["errors"].values.flatten).to eq (["has already been taken"])
         end
       end
@@ -112,12 +96,10 @@ RSpec.describe Api::V1::UsersController, type: :controller do
           process :create, method: :post, params: {username: "cindy123", email: nil, password: "qwerty", password_confirmation: "qwerty"}
         end
         it "returns 422 status" do
-          # test for the 422 status-code
           expect(response.status).to eq(422)
         end
 
         it "returns an error message" do
-          # json = JSON.parse(response.body)
           expect(json["errors"].values.flatten).to eq (["can't be blank"])
         end
       end
@@ -127,12 +109,10 @@ RSpec.describe Api::V1::UsersController, type: :controller do
           process :create, method: :post, params: {username: "cindy123", email: "cindy123gmail.com", password: "qwerty", password_confirmation: "qwerty"}
         end
         it "returns 422 status" do
-          # test for the 422 status-code
           expect(response.status).to eq(422)
         end
 
         it "returns an error message" do
-          # json = JSON.parse(response.body)
           expect(json["errors"].values.flatten).to eq (["is invalid"])
         end
       end
@@ -142,22 +122,13 @@ RSpec.describe Api::V1::UsersController, type: :controller do
           process :create, method: :post, params: {username: "cindy123", email: "cindy123@gmail.com", password: "qwerty", password_confirmation: "qwey"}
         end
         it "returns 422 status" do
-          # test for the 422 status-code
           expect(response.status).to eq(422)
         end
 
         it "returns an error message" do
-          # json = JSON.parse(response.body)
           expect(json["errors"].values.flatten).to eq (["doesn't match Password"])
         end
       end
-
-
-      # returns the error message for that attribute not validated
-
-      # user: unique, present, length 5
-      # email: present, email format, uniquenes
-      # password: not matching password_confirmation, present
     end
 
   end
